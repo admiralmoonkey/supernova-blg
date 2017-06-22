@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   has_many :articles
   has_many :comments
+
+  # ROLES = %i[admin moderator author banned]
 end
