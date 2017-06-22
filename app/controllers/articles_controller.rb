@@ -22,7 +22,7 @@ class ArticlesController < ApplicationController
     @article = Article.new(article_params)
 
     if @article.save
-      redirect_to @article
+      redirect_to @article, notice: "The article has been successfully created"
     else
       render 'new'
     end
@@ -32,7 +32,7 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
 
     if @article.update(article_params)
-      redirect_to @article
+      redirect_to @article, notice: "The article has been successfully updated."
     else
       render 'edit'
     end

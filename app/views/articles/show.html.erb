@@ -1,11 +1,11 @@
 <p>
   <strong>Title:</strong>
-  <%= @article.title %>
+  <%= sanitize @article.title.html_safe, tags: %w(a, img), attributes: %w(href, src) %>
 </p>
 
 <p>
   <strong>Text:</strong>
-  <%= @article.text %>
+  <%= sanitize @article.text.html_safe, tags: %w(a, img), attributes: %w(href, src) %>
 </p>
 
 <h2>Comments</h2>
@@ -21,8 +21,11 @@
   <p>Sign in to comment</p>
 <% end %>
 
-<% if signed_in? %>
+<% if signed_in? && current_user.admin?%>
   <%= link_to 'Edit', edit_article_path(@article) %>|
+  <%= link_to 'Delete', article_path(@article),
+                  method: :delete,
+                  data: {confirm: 'Are you sure?'} %>|
 <% end %>
 
 <%= link_to 'Back', articles_path %>
