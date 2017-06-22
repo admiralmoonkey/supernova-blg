@@ -21,6 +21,7 @@
     </tr>
   <% end %>
 </table>
+<%= will_paginate @articles %>
 
 <% if signed_in? %>
   <%= link_to 'New Article', new_article_path %>

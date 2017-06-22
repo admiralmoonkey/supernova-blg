@@ -9,7 +9,10 @@
 </p>
 
 <h2>Comments</h2>
-<%= render @article.comments %>
+<!--<%= render @article.comments %>-->
+<%= render 'comments' %>
+<%= will_paginate @comments %>
+
 
 <% if signed_in? %>
   <h2>Add a Comment:</h2>
