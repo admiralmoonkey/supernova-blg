@@ -1,31 +1,42 @@
-<p>
-  <strong>Title:</strong>
-  <%= sanitize @article.title.html_safe, tags: %w(a, img), attributes: %w(href, src) %>
-</p>
+<div class="basic-container-2">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3><%= sanitize @article.title.html_safe, tags: %w(a img), attributes: %w(href src) %></h3><br>
+      <small><em><%= "#{time_ago_in_words(@article.created_at)} ago" %></em></small>
+    </div>
+    <!--end panel-header-->
+    <div class="panel-body">
+      <p>
+        <%= sanitize @article.text.html_safe, tags: %w(a img table tbody tr td th span strong), attributes: %w(href src border style cellpadding em) %>
+      </p>
+    </div><!--end panel-body-->
+    <div class="panel-footer">
+      <% if signed_in? && current_user.admin?%>
+        <%= link_to 'Edit', edit_article_path(@article) %> |
+        <%= link_to 'Delete', article_path(@article),
+                        method: :delete,
+                        data: {confirm: 'Are you sure?'} %>
+      <% end %>
+    </div><!--end footer-->
+  </div><!--end panel-default-->
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3>Comments</h3>
+    </div><!--end panel-heading-->
+    <div class="panel-body">
+      <%= render 'comments' %>
+      <%= will_paginate @comments %>
 
-<p>
-  <strong>Text:</strong>
-  <%= sanitize @article.text.html_safe, tags: %w(a, img), attributes: %w(href, src) %>
-</p>
+      <% if signed_in? %>
+        <h3>Add a Comment:</h3>
+        <%= render 'comments/form' %>
+      <% else %>
+        <p>Sign in to comment</p>
+      <% end %>
 
-<h2>Comments</h2>
-<!--<%= render @article.comments %>-->
-<%= render 'comments' %>
-<%= will_paginate @comments %>
-
-
-<% if signed_in? %>
-  <h2>Add a Comment:</h2>
-  <%= render 'comments/form' %>
-<% else %>
-  <p>Sign in to comment</p>
-<% end %>
-
-<% if signed_in? && current_user.admin?%>
-  <%= link_to 'Edit', edit_article_path(@article) %>|
-  <%= link_to 'Delete', article_path(@article),
-                  method: :delete,
-                  data: {confirm: 'Are you sure?'} %>|
-<% end %>
-
-<%= link_to 'Back', articles_path %>
+    </div><!--end panel-body-->
+    <div class="panel-footer">
+      <%= link_to 'Back', articles_path %>
+    </div><!--end panel-footer-->
+  </div><!--end panel-default-->
+</div><!--end basic-container-2-->

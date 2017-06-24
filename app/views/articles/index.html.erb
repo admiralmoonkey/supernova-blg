@@ -1,28 +1,31 @@
-<h1>Listing all articles</h1>
-
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Text</th>
-  </tr>
-
+<div class="basic-container-2">
   <% @articles.each do |article| %>
-    <tr>
-      <td><%= article.title %></td>
-      <td><%= article.text %></td>
-      <td><%= link_to 'Show', article_path(article)%></td>
-      <%if signed_in? && current_user.admin?%>
-        <td><%= link_to 'Edit', edit_article_path(article)%></td>
-        <td><%= link_to 'Delete', article_path(article),
-                        method: :delete,
-                        data: {confirm: 'Are you sure?'} %>
-        </td>
-      <% end %>
-    </tr>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3><%= article.title %></h3><br>
+        <small><em><%= "#{time_ago_in_words(article.created_at)} ago" %></em></small>
+      </div><!--end panel-heading-->
+      <div class="panel-body">
+        <p><%= article.text %></p>
+      </div><!--end panel-body-->
+      <div class="panel-footer">
+        <%= link_to 'Show', article_path(article)%>
+        <%if signed_in? && current_user.admin?%>
+        | <%= link_to 'Edit', edit_article_path(article)%> |
+        <%= link_to 'Delete', article_path(article),
+                          method: :delete,
+                          data: {confirm: 'Are you sure?'} %>
+        <% end %>
+      </div><!--end panel-footer-->
+    </div><!--end panel-default-->
   <% end %>
-</table>
-<%= will_paginate @articles %>
-
-<% if signed_in? && current_user.admin?%>
-  <%= link_to 'New Article', new_article_path %>
-<% end %>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <%= will_paginate @articles %>
+      <% if signed_in? && current_user.admin?%>
+      <br>
+      <%= link_to 'New Article', new_article_path %>
+      <% end %>
+    </div><!--end panel-body-->
+  </div><!--end panel-default-->
+</div><!--end basic-container-->
