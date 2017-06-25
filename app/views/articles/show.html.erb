@@ -7,7 +7,7 @@
     <!--end panel-header-->
     <div class="panel-body">
       <p>
-        <%= sanitize @article.text.html_safe, tags: %w(a img table tbody tr td th span strong ul li h1 h2 h3 br caption), attributes: %w(href src border style cellpadding em) %>
+        <%= sanitize @article.text.html_safe, tags: %w(a img table tbody tr td th span strong p ul li h1 h2 h3 br caption), attributes: %w(href src border style cellpadding em) %>
       </p>
     </div><!--end panel-body-->
     <% if signed_in? && current_user.admin?%>
