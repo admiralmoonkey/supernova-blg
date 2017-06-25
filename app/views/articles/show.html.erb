@@ -10,14 +10,14 @@
         <%= sanitize @article.text.html_safe, tags: %w(a img table tbody tr td th span strong ul li h1 h2 h3 br caption), attributes: %w(href src border style cellpadding em) %>
       </p>
     </div><!--end panel-body-->
-    <div class="panel-footer">
-      <% if signed_in? && current_user.admin?%>
+    <% if signed_in? && current_user.admin?%>
+      <div class="panel-footer">
         <%= link_to 'Edit', edit_article_path(@article) %> |
         <%= link_to 'Delete', article_path(@article),
                         method: :delete,
                         data: {confirm: 'Are you sure?'} %>
-      <% end %>
-    </div><!--end footer-->
+      </div><!--end footer-->
+    <% end %>
   </div><!--end panel-default-->
   <div class="panel panel-default">
     <div class="panel-heading">
