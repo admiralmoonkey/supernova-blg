@@ -2,14 +2,15 @@
   <% @articles.each do |article| %>
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3><%= sanitize @article.title.html_safe, tags: %w(a), attributes: %w(href src) %></h3><br>
+        <h3><%= sanitize article.title.html_safe, tags: %w(a), attributes: %w(href src) %></h3><br>
         <small><em><%= "#{time_ago_in_words(article.created_at)} ago" %></em></small>
       </div><!--end panel-heading-->
       <div class="panel-body">
         <p>
-          <%= sanitize @article.text.html_safe, tags: %w(a img table tbody tr td th span strong ul li h1 h2 h3 br caption), attributes: %w(href src border style cellpadding em) %>
+          <%= sanitize article.text.html_safe, tags: %w(a img table tbody tr td th span strong ul li h1 h2 h3 br caption), attributes: %w(href src border style cellpadding em) %>
         </p>
       </div><!--end panel-body-->
+
       <%if signed_in? && current_user.admin?%>
         <div class="panel-footer">
           <%= link_to 'Show', article_path(article)%>
