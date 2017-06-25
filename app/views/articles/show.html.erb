@@ -1,13 +1,13 @@
 <div class="basic-container-2">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3><%= sanitize @article.title.html_safe, tags: %w(a img), attributes: %w(href src) %></h3><br>
+      <h3><%= sanitize @article.title.html_safe, tags: %w(a), attributes: %w(href src) %></h3><br>
       <small><em><%= "#{time_ago_in_words(@article.created_at)} ago" %></em></small>
     </div>
     <!--end panel-header-->
     <div class="panel-body">
       <p>
-        <%= sanitize @article.text.html_safe, tags: %w(a img table tbody tr td th span strong), attributes: %w(href src border style cellpadding em) %>
+        <%= sanitize @article.text.html_safe, tags: %w(a img table tbody tr td th span strong ul li h1 h2 h3 br caption), attributes: %w(href src border style cellpadding em) %>
       </p>
     </div><!--end panel-body-->
     <div class="panel-footer">
